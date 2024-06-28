@@ -7,7 +7,7 @@ int main() {
     printf("Error\n");
     return -1;
   }
-  num = (num & 0xFFFF00FF) | (repl & 0x0000FF00);
+  num = (num & 0xFFFF00FF) | (repl & 0x000000FF) << 16;
   printf("%d\n", num);
   return 0;
 }
