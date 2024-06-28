@@ -2,7 +2,7 @@
 
 int main() {
   int num;
-  if (scanf("%d", &num) != 1 && num < 1) {
+  if (scanf("%d", &num) != 1 || num < 1) {
     printf("NaN or number is non-positive\n");
     return -1;
   }
