@@ -164,6 +164,11 @@ void mainloop() {
         }
       }
     } else if (choice == KEY_F(10)) {
+      if (current_window == left) {
+        lfcount = current_files_count;
+      } else {
+        rfcount = current_files_count;
+      }
       break;
     }
   }
