@@ -4,7 +4,7 @@ CFLAGS:=-Wall -Werror -Wextra
 1: 1.c
 	$(CC) $(CFLAGS) 1.c -o 1
 2: 2.c
-	$(CC)  2.c -o 2 -lncursesw -g 
+	$(CC) $(CFLAGS) 2.c -o 2 -lncursesw -g 
 style:
 	clang-format -i *.c
 clean:

@@ -18,7 +18,7 @@ WINDOW *help_window;
 int rows;
 int cols;
 
-int main(int argc, char **argv) {
+int main() {
   initscr();
   cbreak();
   curs_set(0);
