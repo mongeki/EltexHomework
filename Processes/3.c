@@ -1,9 +1,9 @@
-#include <sys/types.h>
-#include <sys/wait.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 #define MAX_INPUT 1024
 #define MAX_ARGV 128
@@ -30,8 +30,8 @@ int main() {
       count++;
       argv[count] = strtok(NULL, " ");
     }
-    argv[count] = NULL;  // MAN execvp: "The array of pointers must be terminated by
-                     // a null pointer."
+    argv[count] = NULL;  // MAN execvp: "The array of pointers must be
+                         // terminated by a null pointer."
     if (strcmp(argv[0], "exit") == 0) {
       break;
     }
