@@ -1,30 +1,31 @@
-#include "stream_local.h"
+#include "stream_inet.h"
 
 int main() {
   int sfd, cfd;
-  struct sockaddr_un addr;
+  struct sockaddr_in addr;
   char buf[BUF_SIZE];
   char answer[BUF_SIZE];
 
-  unlink(SV_SOCK_PATH);
-
-  sfd = socket(AF_LOCAL, SOCK_STREAM, 0);
+  sfd = socket(AF_INET, SOCK_STREAM, 0);
   if (sfd == -1) {
     perror("socket");
     exit(EXIT_FAILURE);
   }
 
   memset(&addr, 0, sizeof(addr));
-  addr.sun_family = AF_LOCAL;
-  strncpy(addr.sun_path, SV_SOCK_PATH, sizeof(addr.sun_path) - 1);
+  addr.sin_family = AF_INET;
+  addr.sin_addr.s_addr = INADDR_ANY;
+  addr.sin_port = htons(PORT);
 
   if (bind(sfd, (struct sockaddr*)&addr, sizeof(addr)) == -1) {
     perror("bind");
+    close(sfd);
     exit(EXIT_FAILURE);
   }
 
   if (listen(sfd, 5) == -1) {
     perror("listen");
+    close(sfd);
     exit(EXIT_FAILURE);
   }
 
@@ -56,7 +57,6 @@ int main() {
 
   close(cfd);
   close(sfd);
-  unlink(SV_SOCK_PATH);
 
   exit(EXIT_SUCCESS);
 }

@@ -1,19 +1,25 @@
-#include "stream_local.h"
+#include "stream_inet.h"
 
 int main() {
   int sock;
-  struct sockaddr_un addr;
+  struct sockaddr_in addr;
   char buffer[BUF_SIZE];
 
-  sock = socket(AF_LOCAL, SOCK_STREAM, 0);
+  sock = socket(AF_INET, SOCK_STREAM, 0);
   if (sock == -1) {
     perror("socket");
     exit(EXIT_FAILURE);
   }
 
   memset(&addr, 0, sizeof(addr));
-  addr.sun_family = AF_LOCAL;
-  strncpy(addr.sun_path, SV_SOCK_PATH, sizeof(addr.sun_path) - 1);
+  addr.sin_family = AF_INET;
+  addr.sin_port = htons(PORT);
+  addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+
+  /*if (inet_pton(AF_INET, "127.0.0.1", &addr.sin_addr) <= 0) {
+    perror("address");
+    exit(EXIT_FAILURE);
+  }*/
 
   if (connect(sock, (struct sockaddr*)&addr, sizeof(addr)) == -1) {
     perror("connect");
