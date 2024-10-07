@@ -25,7 +25,7 @@ int main() {
   }
   printf("Sent to client: %s\n", buf);
 
-  sleep(5);  // time to client, idk why nonblock-mode mq_send
+  sleep(5);  // time to client
 
   ssize_t bytes_read = mq_receive(mq, buf, N, NULL);
   if (bytes_read >= 0) {
