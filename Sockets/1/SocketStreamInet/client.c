@@ -16,11 +16,6 @@ int main() {
   addr.sin_port = htons(PORT);
   addr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-  /*if (inet_pton(AF_INET, "127.0.0.1", &addr.sin_addr) <= 0) {
-    perror("address");
-    exit(EXIT_FAILURE);
-  }*/
-
   if (connect(sock, (struct sockaddr*)&addr, sizeof(addr)) == -1) {
     perror("connect");
     exit(EXIT_FAILURE);

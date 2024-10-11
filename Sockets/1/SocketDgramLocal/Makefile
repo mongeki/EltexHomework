@@ -6,6 +6,6 @@ all: 1
 	$(CC) $(CFLAGS) server.c -o server -g
 	$(CC) $(CFLAGS) client.c -o client -g
 clean:
-	rm -rf a.out 1 2 3 server client
+	rm -rf a.out 1 2 3 server client SOCK
 style:
 	clang-format -i -style=google *.c
