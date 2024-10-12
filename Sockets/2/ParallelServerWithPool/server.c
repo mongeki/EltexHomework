@@ -96,7 +96,8 @@ void *serving(void *arg) {
     int cfd;
 
     if ((cfd = accept(sock, (struct sockaddr *)&claddr, &len)) < 0) {
-      return NULL;
+			pool[myid].is_busy = 0;
+			continue;
     }
 
     while (1) { // Processing client loop
