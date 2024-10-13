@@ -42,18 +42,24 @@ int main() {
   memcpy(saddr.sll_addr, dstmac, 6);
 
   while (1) {
+    printf("Client: ");
+    char buf[BUF_SIZE];
+    fgets(buf, BUF_SIZE, stdin);
+
     char udp_packet[BUF_SIZE];
 
-    struct ether_header* ethhdr = (struct ether_header*)udp_packet;
-    memcpy(ethhdr->ether_dhost, dstmac, 6);
-    memcpy(ethhdr->ether_shost, srcmac, 6);
-    ethhdr->ether_type = htons(ETH_P_IP);
+    /* Skip IP header */
+    struct udphdr* udpheader = (struct udphdr*)(udp_packet + 34);
+    udpheader->uh_sport = htons(9999);
+    udpheader->uh_dport = htons(PORT);
+    udpheader->uh_sum = 0;
+    udpheader->uh_ulen = htons(sizeof(struct udphdr) + strlen(buf));
 
     struct iphdr* ipheader = (struct iphdr*)(udp_packet + 14);
     ipheader->version = 4;
     ipheader->ihl = 5;
     ipheader->tos = 0;              // DS
-    ipheader->tot_len = htons(28);  // auto
+    ipheader->tot_len = htons(29);  // auto
     ipheader->id = 12313;           // auto
     ipheader->frag_off = 0;
     ipheader->ttl = 255;
@@ -63,24 +69,20 @@ int main() {
     ipheader->daddr = inet_addr("192.168.0.16");
     ipheader->check = checksum((unsigned short*)ipheader, 20);  // auto
 
-    /* Skip IP header */
-    struct udphdr* header = (struct udphdr*)(udp_packet + 34);
-
-    header->uh_sport = htons(9999);
-    header->uh_dport = htons(PORT);
-    header->uh_sum = 0;
-
-    printf("Client: ");
-    char buf[BUF_SIZE];
-    fgets(buf, BUF_SIZE, stdin);
-
-    header->uh_ulen = htons(sizeof(struct udphdr) + strlen(buf));
+    struct ether_header* ethheader = (struct ether_header*)udp_packet;
+    memcpy(ethheader->ether_dhost, dstmac, 6);
+    memcpy(ethheader->ether_shost, srcmac, 6);
+    ethheader->ether_type = htons(ETH_P_IP);
 
     /* Skip header and fill payload */
-    strcpy(udp_packet + sizeof(struct udphdr) + sizeof(struct iphdr), buf);
+    strcpy(udp_packet + sizeof(struct udphdr) + sizeof(struct iphdr) +
+               sizeof(struct ether_header),
+           buf);
 
-    sendto(sfd, udp_packet, sizeof(struct ether_header), 0,
-           (struct sockaddr*)&saddr, sizeof(saddr));
+    sendto(sfd, udp_packet,
+           sizeof(struct ether_header) + sizeof(struct iphdr) +
+               sizeof(struct udphdr) + strlen(buf),
+           0, (struct sockaddr*)&saddr, sizeof(saddr));
 
     if (strncmp(buf, "exit", 4) == 0) break;
 
