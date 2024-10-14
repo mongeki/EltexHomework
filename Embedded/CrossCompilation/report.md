@@ -13,4 +13,4 @@ ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make -j6 bzImage
 ARCH=arm make dtbs
 QEMU_AUDIO=none qemu-system-arm -M vexpress-a9 -kernel zImage -dtb vexpress-v2p-ca9.dtb -append "console=ttyAMA0" -nographic
 ```
-![kernel_panic](/img/kernel_panic.png)
+![kernel_panic](img/kernel_panic.png)
