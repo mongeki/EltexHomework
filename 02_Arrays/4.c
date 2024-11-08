@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define N 7
 
@@ -25,5 +26,5 @@ int main() {
     }
     printf("\n");
   }
-  return 0;
+  exit(EXIT_SUCCESS);
 }

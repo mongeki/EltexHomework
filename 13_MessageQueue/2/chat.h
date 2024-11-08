@@ -1,3 +1,6 @@
+#ifndef CHAT_H
+#define CHAT_H
+
 #include <mqueue.h>
 #include <pthread.h>
 #include <stdio.h>
@@ -22,3 +25,5 @@ typedef struct {
 	mqd_t to_client;
 	mqd_t to_server;
 } Client;
+
+#endif

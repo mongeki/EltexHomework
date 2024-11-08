@@ -1,3 +1,6 @@
+#ifndef CHAT_H
+#define CHAT_H
+
 #include <fcntl.h>
 #include <pthread.h>
 #include <stdio.h>
@@ -23,3 +26,5 @@ typedef struct {
 	char clients[MAX_CLIENTS][MAX_NAME_LEN];
 	int client_count;
 } ChatRoom;
+
+#endif

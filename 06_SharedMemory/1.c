@@ -1,18 +1,23 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 #define EMPTY \
   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+
 struct abonent {
   char name[10];
   char second_name[10];
   char tel[10];
 };
+
 void add(struct abonent* phonebook, int index);
 void print_all(struct abonent* phonebook, int size);
 void print_menu();
 void find(struct abonent* phonebook, int size);
 int delete_abonent(struct abonent* phonebook, int size);
+
 int main() {
   int size = 0;
   struct abonent* phonebook;
@@ -55,7 +60,9 @@ int main() {
     }
   }
   if (size) free(phonebook);
+  exit(EXIT_SUCCESS);
 }
+
 int delete_abonent(struct abonent* phonebook, int size) {
   int deleted_count = 0;
   char to_delete[10];
@@ -75,6 +82,7 @@ int delete_abonent(struct abonent* phonebook, int size) {
   printf("Удалено %d совпадений\n", deleted_count);
   return deleted_count;
 }
+
 void print_menu() {
   printf(
       "-------------------------\n"
@@ -82,6 +90,7 @@ void print_menu() {
       "имени\n4. Вывод всех записей\n5. Выход\n"
       "-------------------------\n");
 }
+
 void add(struct abonent* phonebook, int index) {
   printf("Введите имя:\n");
   scanf("%s", phonebook[index - 1].name);
@@ -91,6 +100,7 @@ void add(struct abonent* phonebook, int index) {
   scanf("%s", phonebook[index - 1].tel);
   printf("Добавлено\n");
 }
+
 void find(struct abonent* phonebook, int size) {
   char str[10];
   int count = 0;
@@ -104,6 +114,7 @@ void find(struct abonent* phonebook, int size) {
   }
   printf("Найдено %d совпадений\n", count);
 }
+
 void print_all(struct abonent* phonebook, int size) {
   char empty[] = EMPTY;
   for (int i = 0; i < size; ++i) {

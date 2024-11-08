@@ -26,5 +26,5 @@ int main() {
     pthread_join(thread[j], (void **)&retval);
   }
   printf("a = %ld\n", a);
-  exit(0);
+  exit(EXIT_SUCCESS);
 }

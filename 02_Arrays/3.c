@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define N 6
 
@@ -11,5 +12,5 @@ int main() {
     }
     printf("\n");
   }
-  return 0;
+  exit(EXIT_FAILURE);
 }

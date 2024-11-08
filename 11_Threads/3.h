@@ -1,5 +1,6 @@
 #ifndef THREAD3_H
 #define THREAD3_H
+
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>

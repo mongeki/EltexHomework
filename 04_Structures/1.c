@@ -1,18 +1,23 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 #define EMPTY \
   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+
 struct abonent {
   char name[10];
   char second_name[10];
   char tel[10];
 };
+
 void add(struct abonent* phonebook);
 void print_all(struct abonent* phonebook);
 void print_menu();
 void find(struct abonent* phonebook);
 void initialize(struct abonent* phonebook);
 int delete (struct abonent* phonebook);
+
 int main() {
   int count = 0;
   struct abonent phonebook[100];
@@ -52,6 +57,7 @@ int main() {
       }
     }
   }
+  exit(EXIT_SUCCESS);
 }
 int delete (struct abonent* phonebook) {
   int deleted_count = 0;

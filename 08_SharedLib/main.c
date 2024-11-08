@@ -4,6 +4,7 @@
 
 void print_menu();
 void get_operands(int* a, int* b);
+
 int main() {
   int choice = 0;
   int a, b;

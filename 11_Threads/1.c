@@ -19,5 +19,5 @@ int main() {
   for (int j = 0; j < N; ++j) {
     pthread_join(thread[j], (void **)&retval);
   }
-  exit(0);
+  exit(EXIT_SUCCESS);
 }

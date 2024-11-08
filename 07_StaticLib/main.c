@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "libcalc.h"
 
 void print_menu();
 void get_operands(int* a, int* b);
+
 int main() {
   int choice = 0;
   int a, b;
@@ -38,7 +40,7 @@ int main() {
       }
     }
   }
-  return 0;
+  exit(EXIT_SUCCESS);
 }
 
 void print_menu() {
@@ -48,6 +50,7 @@ void print_menu() {
       "Деление\n5. Выход\n"
       "----------------\n");
 }
+
 void get_operands(int* a, int* b) {
   printf("Введите 2 целых числа\n");
   while (scanf("%d%d", a, b) != 2) {

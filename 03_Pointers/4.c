@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 char* strstr(const char* str, const char* sub);
 
@@ -9,7 +10,7 @@ int main() {
   scanf("%s", sub);
   char* ptr = strstr(str, sub);
   printf("%p\n", ptr);
-  return 0;
+  exit(EXIT_SUCCESS);
 }
 
 char* strstr(const char* str, const char* sub) {

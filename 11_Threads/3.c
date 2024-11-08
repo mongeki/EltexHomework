@@ -27,5 +27,5 @@ int main() {
   }
   pthread_cancel(loader);
 
-  exit(0);
+  exit(EXIT_SUCCESS);
 }

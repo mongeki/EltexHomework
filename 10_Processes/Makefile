@@ -1,6 +1,6 @@
 CC:=gcc
 CFLAGS:=-Wall -Werror -Wextra
-.PHONY: clean style all
+.PHONY: all clean style all
 all: 1 2 3
 1: 1.c
 	$(CC) $(CFLAGS) 1.c -o 1

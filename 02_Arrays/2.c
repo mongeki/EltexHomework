@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define N 7
 
@@ -16,6 +17,7 @@ int main() {
     arr[N - 1 - i] = tmp;
   }
   print(arr);
+  exit(EXIT_SUCCESS);
 }
 
 void print(int *arr) {

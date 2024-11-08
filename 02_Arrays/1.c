@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define N 6
+
+/* Prints square matrix */
 
 int main() {
   int arr[N][N];
@@ -12,5 +15,5 @@ int main() {
     }
     printf("\n");
   }
-  return 0;
+  exit(EXIT_SUCCESS);
 }

@@ -1,5 +1,6 @@
 CC = gcc
 CFLAGS = -std=c11 -Wall -Werror -Wextra 
+.PHONY: all style clean
 all: 1-2 3 4
 1-2: 1-2.c
 	$(CC) $(CFLAGS) $^ -o 1-2.out
